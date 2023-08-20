@@ -6,7 +6,7 @@ type MyRequest = {
 } & Request;
 
 function isBase64Image(base64String: string) {
-  const binaryData = atob(base64String);
+  const binaryData = atob(base64String.slice(0, 20));
 
   // Magic numbers or signature bytes for common image formats
   const magicNumbers = {
@@ -25,7 +25,7 @@ function isBase64Image(base64String: string) {
   return false; // Not recognized as an image
 }
 
-export async function POST(req: MyRequest) {
+export async function POST(req: MyRequest, res: NextResponse) {
   const base64 = (await req.text())?.replace(/^data:image\/[^;]+;base64,/, "");
 
   if (!base64) {

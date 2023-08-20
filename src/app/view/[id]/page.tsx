@@ -8,6 +8,11 @@ export default async function Page({ params }: { params: { id: string } }) {
     },
   });
 
+  // TODO - check if the result is out of date
+  // max of 5 minutes
+
+  // TODO - check if its a qr code
+
   if (!result) return <div>Not found</div>;
 
   const qrCodeBase64 =
